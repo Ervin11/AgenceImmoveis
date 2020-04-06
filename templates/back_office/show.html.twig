@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Offer{% endblock %}
+
+{% block body %}
+    <h1>Offer</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ offer.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ offer.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ offer.description }}</td>
+            </tr>
+            <tr>
+                <th>Surface</th>
+                <td>{{ offer.surface }}</td>
+            </tr>
+            <tr>
+                <th>Rooms</th>
+                <td>{{ offer.rooms }}</td>
+            </tr>
+            <tr>
+                <th>Bedrooms</th>
+                <td>{{ offer.bedrooms }}</td>
+            </tr>
+            <tr>
+                <th>Floor</th>
+                <td>{{ offer.floor }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ offer.price }}</td>
+            </tr>
+            <tr>
+                <th>Heat</th>
+                <td>{{ offer.heat }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ offer.city }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ offer.address }}</td>
+            </tr>
+            <tr>
+                <th>Postal_code</th>
+                <td>{{ offer.postalCode }}</td>
+            </tr>
+            <tr>
+                <th>Sold</th>
+                <td>{{ offer.sold ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ offer.createdAt ? offer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('offer_index') }}">back to list</a>
+
+    <a href="{{ path('offer_edit', {'id': offer.id}) }}">edit</a>
+
+    {{ include('back_office/_delete_form.html.twig') }}
+{% endblock %}

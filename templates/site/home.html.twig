@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+  {{ include('site/navigation.html.twig') }}
+
+  <div class="container">
+
+    <div class="jumbotron jumbotron-fluid my-5">
+      <div class="container">
+        <h1 class="display-5 text-center font-weight-bold" style="color: #2E768F;">Agence Immoveïs</h1>
+        <p class="lead mx-auto text-center mt-5 w-75">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto aut dignissimos, eius eligendi enim et excepturi harum illum libero maiores nemo nihil numquam, porro quaerat saepe sit, suscipit veniam vero.</p>
+      </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between" style="margin-top: 4em">
+      {% for i in 0..5 %}
+        <div class="card mb-5 hvr-grow" style="width: 21rem;">
+          <img class="card-img-top" src="{{ asset('images/maison.jpeg') }}" alt="Card image cap">
+          <div class="card-body px-4">
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title">Appartement</h5>
+              <span style="color: goldenrod">4 pièces - 1500 m²</span>
+            </div>
+
+            <div class="d-flex justify-content-between flex-wrap">
+              <p class="card-text text-secondary">Bordeaux (33000)</p>
+              <h5 class="card-text font-weight-bold" style="color: #B0413E">1 350 000 €</h5>
+            </div>
+
+            {#        <a href="#" class="btn btn-primary">Consulter l'offre</a>#}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+{% endblock %}

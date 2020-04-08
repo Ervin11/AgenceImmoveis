@@ -3,7 +3,7 @@ body {
 }
 
 .navbar {
-    height: 5.5em;
+    height: 5.7em;
 }
 
 .jumbotron {
@@ -30,5 +30,67 @@ body {
 .hvr-grow:hover,
 .hvr-grow:focus,
 .hvr-grow:active {
-    transform: scale(1.05);
+    transform: scale(1.01);
+}
+
+.banner {
+    background-image: url("../images/banner.jpg");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*opacity: 0.7;*/
+}
+
+.jumbotron::after {
+
+    content: "";
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Modal styles */
+
+.modal .modal-dialog {
+    max-width: 600px;
+}
+
+.modal .modal-header, .modal .modal-body, .modal .modal-footer {
+    padding: 20px 30px;
+}
+
+.modal .modal-content {
+    border-radius: 3px;
+}
+
+.modal .modal-footer {
+    background: #ecf0f1;
+    border-radius: 0 0 3px 3px;
+}
+
+.modal .modal-title {
+    display: inline-block;
+}
+
+.modal .form-control {
+    border-radius: 2px;
+    box-shadow: none;
+    border-color: #dddddd;
+}
+
+.modal textarea.form-control {
+    resize: vertical;
+}
+
+.modal .btn {
+    border-radius: 2px;
+    min-width: 100px;
+}
+
+.modal div label {
+    font-weight: normal;
 }

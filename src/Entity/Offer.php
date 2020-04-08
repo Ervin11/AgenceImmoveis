@@ -3,48 +3,52 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfferRepository")
- * @UniqueEntity("title")
+ * @Vich\Uploadable()
  */
 class Offer
 {
     const HEAT = [
-      0 => 'Electrique',
-      1 => 'Gaz'
+      1 => 'Electrique',
+      2 => 'Gaz'
     ];
 
     const HABITAT = [
-      0 => 'Appartement',
-      1 => 'Maison'
+      1 => 'Appartement',
+      2 => 'Maison'
     ];
 
     const TYPE = [
-      0 => 'Location',
-      1 => 'Vente'
+      1 => 'Location',
+      2 => 'Vente'
     ];
 
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(type="guid")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *   min="6",
-     *   max="50",
-     *   minMessage="Le titre doit au moins faire 6 caractères",
-     *   maxMessage="Le titre doit faire moins de 50 caractères"
-     * )
+    * @var string|null
+    * @ORM\Column(type="string", length=255, nullable=true)
+    */
+    private $filename;
+
+    /**
+     * @var File|null
+     * @Assert\Image(mimeTypes={"image/jpeg", "image/png"})
+     * @Vich\UploadableField(mapping="offers_image", fileNameProperty="filename")
      */
-    private $title;
+    private $image;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -130,26 +134,19 @@ class Offer
      */
     private $habitat;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
     public function __construct()
     {
       $this->created_at = new \DateTime();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -334,4 +331,59 @@ class Offer
     {
       return self::HABITAT[$this->habitat];
     }
+
+    /**
+     * @return string|null
+     */
+    public function getFilename(): ?string
+    {
+      return $this->filename;
+    }
+
+    /**
+     * @param string|null $filename
+     * @return Offer
+     */
+    public function setFilename(?string $filename): Offer
+    {
+      $this->filename = $filename;
+      return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImage(): ?File
+    {
+      return $this->image;
+    }
+
+    /**
+     * @param File|null $image
+     * @return Offer
+     */
+    public function setImage(?File $image): Offer
+    {
+      $this->image = $image;
+
+      if ($this->image instanceof UploadedFile) {
+
+        $this->updated_at = new \DateTime('now');
+      }
+
+      return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
 }

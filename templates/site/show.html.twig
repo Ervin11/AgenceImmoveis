@@ -23,10 +23,11 @@
             <h2>{{ offer.habitatType }}</h2>
             <p>{{ offer.rooms }} pièces - {{ offer.surface }} m²</p>
             {% if offer.habitat == 1 %}
-                <p class="h1 font-weight-bold mt-3">{{ offer.price | number_format(0, '', ' ') }} €<small class="ml-1 h4">{% if offer.type == 1 %}/ mois{% endif %}</small></p>
+                <p class="h1 font-weight-bold">{{ offer.price | number_format(0, '', ' ') }} €<small class="ml-1 h4">{% if offer.type == 1 %}/ mois{% endif %}</small></p>
             {% elseif offer.habitat == 2 %}
-                <p class="h1 font-weight-bold mt-3">{{ offer.price | number_format(0, '', ' ') }} €<small class="ml-1 h4">{% if offer.type == 1 %}/ mois{% endif %}</small></p>
+                <p class="h1 font-weight-bold">{{ offer.price | number_format(0, '', ' ') }} €<small class="ml-1 h4">{% if offer.type == 1 %}/ mois{% endif %}</small></p>
             {% endif %}
+            <a href="#contactModal" class="btn btn-primary mt-3 contactBtn" data-toggle="modal">Contacter l'agence</a>
         </div>
 
     </div>
@@ -44,10 +45,11 @@
 
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active show">
+
                 {% if offer.description %}
-                <p class="my-4 text-white">{{ offer.description }}</p>
+                    <p class="my-4 text-white">{{ offer.description }}</p>
                 {% else %}
-                <p class="my-4 text-white">Pas de description</p>
+                    <p class="my-4 text-white">Pas de description</p>
                 {% endif %}
 
                 <table class="table table-striped" style="background-color: white">
@@ -89,26 +91,8 @@
                         <td>{{ offer.city }}</td>
                     </tr>
                     <tr>
-                        <th>Adresse</th>
-                        <td>{{ offer.address }}</td>
-                    </tr>
-                    <tr>
                         <th>Code Postal</th>
                         <td>{{ offer.postalCode }}</td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {% if offer.type == 1 %}
-                                Vendu
-                            {% else %}
-                                Loué
-                            {% endif %}
-                        </th>
-                        <td>{{ offer.sold ? 'Oui' : 'Non' }}</td>
-                    </tr>
-                    <tr>
-                        <th>Crée le</th>
-                        <td>{{ offer.createdAt ? offer.createdAt|date('d/m/Y') : '' }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -117,8 +101,48 @@
 
     </div>
 
-    <div class="d-flex justify-content-center my-5">
-        <a class="btn btn-primary w-25" href="{{ path('offer_index') }}">Retour à la liste</a>
+    <div id="contactModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="modal-contact" action="{{ path('email') }}" method="post">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Contacter l'agence</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Adresse email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea rows="5" class="form-control" name="message" required></textarea>
+                            <input type="hidden" value="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                        <input type="submit" class="btn btn-success" value="Envoyer">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <div class="d-flex justify-content-center my-5">
+        <a class="btn btn-primary w-25" href="{{ path('offers') }}">Retour à la liste</a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $(".contactBtn").click(function () {
+
+                $('#modal-contact').attr('action', $(this).attr('data-path'))
+                $('.token').attr('value', $(this).attr('data-token'))
+            })
+        });
+    </script>
 
 {% endblock %}

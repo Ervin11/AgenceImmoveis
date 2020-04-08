@@ -5,11 +5,14 @@ namespace App\Controller;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 /**
  * @Route("/admin/offer")
@@ -24,11 +27,12 @@ class OfferController extends AbstractController
 
       if ($request->request->get('filter')) {
 
-        $data = $offerRepository->findByTitle($request->request->get('filter'));
+        $data = $offerRepository->findByCity($request->request->get('filter'));
       }
       else {
 
         $data = $this->getDoctrine()->getRepository(Offer::class)->findBy([],['created_at' => 'desc']);
+
       }
 
       $offers = $paginator->paginate($data, $request->query->getInt('page', 1), 10);
@@ -67,19 +71,24 @@ class OfferController extends AbstractController
     public function show(Offer $offer): Response
     {
         return $this->render('back_office/show.html.twig', [
-            'back_office' => $offer,
+            'offer' => $offer,
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="offer_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Offer $offer): Response
+    public function edit(Request $request, Offer $offer, CacheManager $cacheManager, UploaderHelper $helper): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($offer->getImage() instanceof UploadedFile) {
+              $cacheManager->remove($helper->asset($offer, 'image'));
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('offer_index');

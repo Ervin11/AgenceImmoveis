@@ -8,18 +8,36 @@
 
   <div class="container">
 
-    <div class="jumbotron jumbotron-fluid my-5 banner">
-      <div class="container">
-        <h1 class="display-5 text-center font-weight-bold" style="color: #2E768F; opacity: 1">Agence Immoveïs</h1>
-        <p class="lead mx-auto text-center mt-5 w-75" style="opacity: 1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto aut dignissimos, eius eligendi enim et excepturi harum illum libero maiores nemo nihil numquam, porro quaerat saepe sit, suscipit veniam vero.</p>
+    <h1 class="text-center text-white font-weight-bold" style="margin-top: 2em; margin-bottom: 2em">Toutes les annonces</h1>
+
+      {{ form_start(form) }}
+
+      <div class="form-row justify-content-center">
+
+        <div class="col-md-2">{{ form_row(form.maxPrice) }}</div>
+        <div class="col-md-2">{{ form_row(form.minSurface) }}</div>
+        <div class="col-md-2">{{ form_row(form.minRooms) }}</div>
+        <div class="col-md-2">{{ form_row(form.minBedRooms) }}</div>
+
       </div>
-    </div>
-    {% if offers %}
-      <h3 class="text-center py-4 rounded" style="background-color: #f8f9fa; color: #2C5077">Les dernières offres</h3>
-    {% endif %}
+      <div class="form-row justify-content-center">
+
+        <div class="col-md-2">{{ form_row(form.type) }}</div>
+        <div class="col-md-2">{{ form_row(form.habitat) }}</div>
+        <div class="col-md-2">{{ form_row(form.heat) }}</div>
+        <div class="col-md-2">{{ form_row(form.city) }}</div>
+
+      </div>
+
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-primary w-25">Rechercher</button>
+      </div>
+
+      {{ form_end(form) }}
+
     <div class="d-flex flex-wrap justify-content-around" style="margin-top: 4em">
       {% for offer in offers %}
-        <div class="card mb-5 hvr-grow" style="width: 21rem;">
+        <div class="card mb-5 hvr-grow h-25" style="width: 21rem;">
 
           <a href="{{ path('show', {'id': offer.id}) }}" class="stretched-link text-decoration-none">
 
@@ -32,7 +50,6 @@
             {% else %}
               <img class="card-img-top" src="{{ asset('images/empty_flat.png') | imagine_filter('thumb') }}" alt="Card image cap">
             {% endif %}
-
             <div class="card-body px-4">
               <div class="d-flex justify-content-between">
                 <h5 class="card-title">{{ offer.getHabitatType }}</h5>
@@ -48,9 +65,12 @@
 
           </a>
 
+
         </div>
       {% endfor %}
     </div>
+
+    <div class="d-flex justify-content-center my-4">{{ knp_pagination_render(offers) }}</div>
 
   </div>
 

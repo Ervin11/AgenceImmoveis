@@ -6,6 +6,7 @@ use App\Entity\Offer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,9 +19,6 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', TextType::class, [
-              'label' => 'Titre',
-            ])
             ->add('description', TextareaType::class, ['label' => 'Description', 'required' => false])
             ->add('type', ChoiceType::class, [
               'label' => 'Type',
@@ -43,6 +41,9 @@ class OfferType extends AbstractType
             ->add('address', TextType::class, ['label' => 'Adresse'])
             ->add('postal_code', TextType::class, ['label' => 'Code Postal'])
             ->add('sold',CheckboxType::class, ['label' => 'Vendu', 'required' => false])
+            ->add('image', FileType::class, [
+              'required' => false
+            ])
             ->add('submit', SubmitType::class, [
               'attr' => [
                 'class' => 'btn btn-success w-25'

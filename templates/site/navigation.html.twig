@@ -1,19 +1,23 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
   <div class="container">
-    <a class="navbar-brand" href="#">
-      <img src="{{ asset('images/logo.png') }}" width="100" alt="">
+    <a class="navbar-brand" href="{{ path('home') }}">
+      <img src="{{ asset('images/logo.png') }}" width="60" alt="">
     </a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Accueil</a>
+          <a class="nav-link" style="color: #2C5077; font-family: Roboto" href="{{ path('home') }}">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Toutes les annonces</a>
+          <a class="nav-link" href="{{ path('offers') }}">Toutes les annonces</a>
         </li>
       </ul>
     </div>
-    <a class="btn btn-success" href="{{ path('app_login') }}">Espace Administrateur</a>
+    {% if not app.user %}
+      <a class="btn btn-success" href="{{ path('app_login') }}">Espace Administrateur</a>
+    {% else %}
+      <a class="btn btn-success" href="{{ path('offer_index') }}">Espace Administrateur</a>
+    {% endif %}
   </div>
 </nav>

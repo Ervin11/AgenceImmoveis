@@ -31,7 +31,7 @@ Le projet étant libre, j'ai décidé pour ma part de développer un site web et
 
 ***Site Back-Office*** :
 
-- Page Connexion : Formulaire permettant de se connecter au back-office (User : admin / MDP : admin)
+- Page Connexion : Formulaire permettant de se connecter au back-office (User : admin@admin.com / MDP : admin)
 - Page Accueil : Listing de toutes les offres de l'entreprise par ordre décroissant, filtrables par villes
 - Page Annonce unique : Présentation de l'offre détaillée, ainsi que sa localisation sur une carte (Non implémentée)
 - Page Nouvelle annonce : Formulaire permettant la création d'une nouvelle offre

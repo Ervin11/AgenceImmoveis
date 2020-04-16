@@ -22,17 +22,17 @@ En effet, il s'agit ici de développer un site web, statique ou marchand, attest
 
 Le projet étant libre, j'ai décidé pour ma part de développer un site web et back-office d'une agence immobilière fictive.
 
-Site Web :
+***Site Web*** :
 
-Page Accueil : Listing des dernières offres non loués ni vendus.
-Page Toutes les annonces : Listing des dernières offres non loués ni vendus, mais avec un système de filtres.
-Page Annonce unique : Présentation de l'offre détaillée, ainsi que sa localisation sur une carte (Non implémentée)
+- Page Accueil : Listing des dernières offres non loués ni vendus.
+- Page Toutes les annonces : Listing des dernières offres non loués ni vendus, mais avec un système de filtres.
+- Page Annonce unique : Présentation de l'offre détaillée, ainsi que sa localisation sur une carte (Non implémentée)
 
-Site Back-Office :
+***Site Back-Office*** :
 
-Page Connexion : Formulaire permettant de se connecter au back-office.
-Page Accueil : Listing de toutes les offres de l'entreprise par ordre décroissant, filtrables par villes.
-Page Annonce unique : Présentation de l'offre détaillée, ainsi que sa localisation sur une carte (Non implémentée)
-Page Nouvelle annonce : Formulaire permettant la création d'une nouvelle offre
-Page Editer une annonce : Formulaire permettant la modification d'une offre
-Bouton Supprimer l'annonce : Formulaire permettant de supprimer une annonce unique (Dans la page Accueil) 
+- Page Connexion : Formulaire permettant de se connecter au back-office.
+- Page Accueil : Listing de toutes les offres de l'entreprise par ordre décroissant, filtrables par villes.
+- Page Annonce unique : Présentation de l'offre détaillée, ainsi que sa localisation sur une carte (Non implémentée)
+- Page Nouvelle annonce : Formulaire permettant la création d'une nouvelle offre
+- Page Editer une annonce : Formulaire permettant la modification d'une offre
+- Bouton Supprimer l'annonce : Formulaire permettant de supprimer une annonce unique (Dans la page Accueil) 

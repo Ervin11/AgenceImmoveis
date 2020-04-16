@@ -45,7 +45,6 @@ Le projet étant libre, j'ai décidé pour ma part de développer un site web et
 ```cd AgenceImmoveis && composer install```
 
 ```php bin/console doctrine:database:create```
-
 ```php bin/console doctrine:make:migrations```
 
 ```php bin/console doctrine:fixtures:load```

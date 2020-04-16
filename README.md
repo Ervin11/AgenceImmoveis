@@ -27,7 +27,7 @@ Le projet étant libre, j'ai décidé pour ma part de développer un site web et
 
 - Page Accueil : Listing des dernières offres non loués ni vendus.
 - Page Toutes les annonces : Listing des dernières offres non loués ni vendus, mais avec un système de filtres.
-- Page Annonce unique : Présentation de l'offre détaillée, ainsi que sa localisation sur une carte (Non implémentée)
+- Page Annonce unique : Présentation de l'offre détaillée, bouton Contacter l'agence qui permet d'envoyer un mail, ainsi que la localisation de l'annonce sur une carte (Non implémentée)
 
 ***Site Back-Office*** :
 
@@ -43,8 +43,6 @@ Le projet étant libre, j'ai décidé pour ma part de développer un site web et
 ```git clone git@github.com:Ervin11/AgenceImmoveis.git```
 
 ```cd AgenceImmoveis && composer install```
-
-```composer require --dev symfony/maker-bundle```
 
 ```php bin/console doctrine:database:create```
 
